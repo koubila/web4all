@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Site vitrine - Équipe de 4 experts : full‑stack & DevOps, support technique, commercial web, web mobile & UX." />
+  <title>Votre Équipe Tech & Web</title>
+
+  <style>
+    :root {
+      --bg: #0f1116;
+      --fg: #e8eaf1;
+      --muted: #a0a3b1;
+      --accent: #6c5ce7;
+      --accent-2: #00cec9;
+      --card: #1a1d24;
+      --border: #2a2f3a;
+      --radius: 14px;
+      --maxw: 1180px;
+      --shadow: 0 10px 30px rgba(0,0,0,.15);
+      --transition: all .25s ease;
+    }
+    .light {
+      --bg: #f8fafc;
+      --fg: #111827;
+      --muted: #6b7280;
+      --accent: #4f46e5;
+      --accent-2: #0ea5e9;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --shadow: 0 6px 20px rgba(0,0,0,.08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    h1,h2,h3 { line-height: 1.2; margin: 0 0 .75rem; }
+    p { margin: 0 0 1rem; color: var(--muted); }
+
+    /* Layout */
+    header {
+      position: sticky; top: 0; z-index: 999;
+      backdrop-filter: blur(10px);
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      max-width: var(--maxw); margin: 0 auto; padding: .75rem 1rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .brand { display: flex; align-items: center; gap: .5rem; font-weight: 700; }
+    .brand-mark {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+    nav ul {
+      display: flex; gap: 1rem; list-style: none; margin: 0; padding: 0;
+    }
+    nav a {
+      padding: .35rem .6rem; border-radius: 8px; transition: var(--transition);
+    }
+    nav a:hover { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+
+    .theme-toggle {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--fg);
+      padding: .35rem .6rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .theme-toggle:hover { background: color-mix(in srgb, var(--fg) 6%, transparent); }
+
+    main { max-width: var(--maxw); margin: 0 auto; padding: 0 1rem; }
+    section { padding: 5rem 0; }
+    .section-title {
+      text-align: center; margin-bottom: 3rem;
+    }
+    .section-title p { max-width: 680px; margin: .5rem auto 0; }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      place-items: center;
+      min-height: calc(100vh - 72px);
+      text-align: center;
+      gap: 1.25rem;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text; color: transparent;
+    }
+    .hero .cta {
+      display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: .8rem 1.1rem; border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 600; cursor: pointer; transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+    }
+    .btn.secondary {
+      background: transparent; border-color: var(--border);
+      color: var(--fg);
+      box-shadow: none;
+    }
+    .btn.secondary:hover { background: color-mix(in srgb, var(--fg) 6%, transparent); }
+
+    /* Grid helpers */
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+      .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+      .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: transform .2s ease;
+    }
+    .card:hover { transform: translateY(-2px); }
+
+    /* Services */
+    .service-badge {
+      display: inline-block;
+      font-size: .75rem;
+      padding: .2rem .5rem;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      color: var(--accent);
+      margin-bottom: .5rem;
+      font-weight: 600;
+    }
+    .service-list {
+      list-style: none; margin: 0; padding: 0;
+    }
+    .service-list li {
+      display: flex; gap: .5rem; align-items: flex-start;
+      margin-bottom: .45rem;
+    }
+    .service-list li::before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: 700;
+      margin-top: .1rem;
+    }
+
+    /* Team */
+    .avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-weight: 700;
+      background: color-mix(in srgb, var(--accent) 18%, transparent);
+      color: var(--accent);
+      margin-bottom: 1rem;
+      box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--accent) 40%, transparent);
+    }
+    .role {
+      font-weight: 600; color: var(--fg); margin-bottom: .25rem;
+    }
+    .tags {
+      display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem;
+    }
+    .tag {
+      font-size: .75rem; padding: .15rem .5rem; border-radius: 999px;
+      background: color-mix(in srgb, var(--fg) 6%, transparent);
+      color: var(--muted);
+    }
+
+    /* Process timeline */
+    .timeline {
+      position: relative; padding-left: 1.5rem;
+    }
+    .timeline::before {
+      content: ""; position: absolute; left: .6rem; top: 0; bottom: 0;
+      width: 2px; background: var(--border);
+    }
+    .step {
+      position: relative; margin-bottom: 1.75rem;
+    }
+    .step::before {
+      content: "";
+      position: absolute; left: -1.3rem; top: .2rem;
+      width: .9rem; height: .9rem; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent);
+    }
+
+    /* Tech stack badges */
+    .stack {
+      display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center;
+    }
+    .stack span {
+      border: 1px solid var(--border);
+      background: var(--card);
+      padding: .35rem .65rem; border-radius: 8px;
+      font-size: .9rem;
+    }
+
+    /* Contact form */
+    form {
+      max-width: 620px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    label { display: flex; flex-direction: column; gap: .35rem; font-size: .9rem; }
+    input, textarea {
+      background: transparent; color: var(--fg);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: .8rem 1rem;
+      font-family: inherit;
+    }
+    textarea { min-height: 140px; resize: vertical; }
+    .form-note { font-size: .8rem; color: var(--muted); text-align: center; margin-top: .75rem; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    /* Back to top */
+    #backToTop {
+      position: fixed; right: 1rem; bottom: 1rem; z-index: 998;
+      opacity: 0; visibility: hidden; transform: translateY(20px);
+      transition: var(--transition);
+    }
+    #backToTop.show {
+      opacity: 1; visibility: visible; transform: translateY(0);
+    }
+
+    /* Small helper for code-like text */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: color-mix(in srgb, var(--fg) 6%, transparent);
+      padding: .15rem .35rem; border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a href="#" class="brand" aria-label="Accueil">
+        <span class="brand-mark"></span> Équipe Tech & Web
+      </a>
+
+      <nav aria-label="Navigation principale">
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#equipe">Équipe</a></li>
+          <li><a href="#methode">Méthodologie</a></li>
+          <li><a href="#technos">Technos</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">🌓</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+      <h1 id="hero-title">Nous construisons, déployons et faisons <span>vivre</span> vos produits web</h1>
+      <p>4 experts complémentaires : full‑stack & CI/CD, support technique, business & stratégie commerciale, web mobile & UX design.</p>
+      <div class="cta">
+        <a href="#services" class="btn primary">Découvrir nos services</a>
+        <a href="#contact" class="btn secondary">Nous contacter</a>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" aria-labelledby="services-title">
+      <div class="section-title">
+        <h2 id="services-title">Nos services</h2>
+        <p>Des offres alignées sur les expertises de chaque membre, du prototype au run en production.</p>
+      </div>
+
+      <div class="grid cols-4">
+        <!-- Nghia -->
+        <article class="card">
+          <span class="service-badge">Ingénierie Full‑Stack & DevOps</span>
+          <h3>M. Truong Nghia</h3>
+          <p class="role">Ingénieur informatique full‑stack (web) • CI/CD • Docker • SaaS</p>
+          <ul class="service-list">
+            <li>Conception & développement d’applications web (front & back)</li>
+            <li>Mise en place de pipelines CI/CD (GitHub Actions, GitLab CI, etc.)</li>
+            <li>Conteneurisation & orchestration (Docker, Docker Compose)</li>
+            <li>Architecture & industrialisation de produits SaaS</li>
+            <li>Qualité logicielle (tests, code review, intégration continue)</li>
+          </ul>
+        </article>
+
+        <!-- Gauthier -->
+        <article class="card">
+          <span class="service-badge">Support & Exploitation</span>
+          <h3>M. LATEVE Gauthier</h3>
+          <p class="role">Support technique • Hotline • Débogage • Installation physique</p>
+          <ul class="service-list">
+            <li>Hotline & support utilisateurs niveaux 1/2/3</li>
+            <li>Diagnostic & débogage d’incidents applicatifs et matériels</li>
+            <li>Installations physiques & déploiements sur site</li>
+            <li>Documentation & procédures d’exploitation</li>
+            <li>Monitoring et supervision (alerting, logs)</li>
+          </ul>
+        </article>
+
+        <!-- Nicolas -->
+        <article class="card">
+          <span class="service-badge">Business & Croissance</span>
+          <h3>M. Nguyen Nicolas</h3>
+          <p class="role">Commercial web • ex‑développeur full‑stack</p>
+          <ul class="service-list">
+          <li>Stratégie commerciale & acquisition (B2B/B2C)</li>
+          <li>Discovery produit & cadrage fonctionnel avec background technique</li>
+          <li>Rédaction de propositions commerciales & pilotage de POC</li>
+          <li>Optimisation du cycle de vente & CRM</li>
+          <li>Analyse de la valeur & ROI des fonctionnalités</li>
+          </ul>
+        </article>
+
+        <!-- Bruno -->
+        <article class="card">
+          <span class="service-badge">Web Mobile & UX Design</span>
+          <h3>M. Lam Bruno</h3>
+          <p class="role">Spécialiste web mobile • UX / UI design</p>
+          <ul class="service-list">
+            <li>Conception UX (atelier UX, parcours, wireframes)</li>
+            <li>Design UI (systèmes de design, maquettes haute fidélité)</li>
+            <li>Développement front web mobile first</li>
+            <li>Prototypage et tests utilisateurs</li>
+            <li>Accessibilité & performance</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section id="equipe" aria-labelledby="equipe-title">
+      <div class="section-title">
+        <h2 id="equipe-title">L’équipe</h2>
+        <p>Une équipe resserrée, senior et opérationnelle, couvrant tout le cycle de vie d’un produit.</p>
+      </div>
+
+      <div class="grid cols-4">
+        <article class="card" aria-label="M. Truong Nghia">
+          <div class="avatar">TN</div>
+          <h3>M. Truong Nghia</h3>
+          <div class="role">Ingénieur Full‑Stack & DevOps</div>
+          <p>Spécialiste web, CI/CD, Docker et plateformes SaaS.</p>
+          <div class="tags">
+            <span class="tag">Node.js</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">CI/CD</span>
+            <span class="tag">Docker</span>
+            <span class="tag">SaaS</span>
+          </div>
+        </article>
+
+        <article class="card" aria-label="M. LATEVE Gauthier">
+          <div class="avatar">GL</div>
+          <h3>M. LATEVE Gauthier</h3>
+          <div class="role">Support & Exploitation</div>
+          <p>Support technique, hotline, débogage, installations physiques.</p>
+          <div class="tags">
+            <span class="tag">ITIL</span>
+            <span class="tag">Monitoring</span>
+            <span class="tag">Incident Mgmt</span>
+          </div>
+        </article>
+
+        <article class="card" aria-label="M. Nguyen Nicolas">
+          <div class="avatar">NN</div>
+          <h3>M. Nguyen Nicolas</h3>
+          <div class="role">Commercial Web</div>
+          <p>Ancien dev full‑stack, il allie compréhension technique et business.</p>
+          <div class="tags">
+            <span class="tag">Sales</span>
+            <span class="tag">Product</span>
+            <span class="tag">CRM</span>
+          </div>
+        </article>
+
+        <article class="card" aria-label="M. Lam Bruno">
+          <div class="avatar">BL</div>
+          <h3>M. Lam Bruno</h3>
+          <div class="role">Web Mobile & UX/UI</div>
+          <p>Conçoit des expériences mobiles performantes et accessibles.</p>
+          <div class="tags">
+            <span class="tag">UX</span>
+            <span class="tag">UI</span>
+            <span class="tag">Figma</span>
+            <span class="tag">Mobile first</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- METHOD -->
+    <section id="methode" aria-labelledby="methode-title">
+      <div class="section-title">
+        <h2 id="methode-title">Notre méthodologie</h2>
+        <p>Une approche pragmatique, orientée valeur, avec une boucle de feedback courte.</p>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Le chemin vers un produit qui shippe</h3>
+          <div class="timeline">
+            <div class="step">
+              <h4>1. Découverte & cadrage</h4>
+              <p>Ateliers, personae, priorisation par valeur, alignement business/tech.</p>
+            </div>
+            <div class="step">
+              <h4>2. Design & prototypage</h4>
+              <p>Wireframes, UI kit, tests utilisateurs rapides.</p>
+            </div>
+            <div class="step">
+              <h4>3. Développement & CI/CD</h4>
+              <p>Itérations courtes, revues de code, pipelines automatisés.</p>
+            </div>
+            <div class="step">
+              <h4>4. Déploiement & run</h4>
+              <p>Observabilité, SLO/SLA, support utilisateurs & maintenance.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Nos engagements</h3>
+          <ul class="service-list">
+            <li>Transparence et pédagogie sur les choix techniques</li>
+            <li>Time‑to‑market court, focus sur l’essentiel (MVP → scaling)</li>
+            <li>Qualité logicielle & sécurité by design</li>
+            <li>Documentation et transfert de compétences</li>
+            <li>Contrats simples, livrables clairs</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNOS -->
+    <section id="technos" aria-labelledby="technos-title">
+      <div class="section-title">
+        <h2 id="technos-title">Technologies</h2>
+        <p>Un outillage moderne, éprouvé, et maintenable.</p>
+      </div>
+
+      <div class="stack">
+        <span>JavaScript / TypeScript</span>
+        <span>Node.js</span>
+        <span>React / Vue</span>
+        <span>Next.js / Nuxt</span>
+        <span>Express / NestJS</span>
+        <span>PostgreSQL / MySQL</span>
+        <span>Docker</span>
+        <span>GitHub Actions / GitLab CI</span>
+        <span>Terraform (selon besoin)</span>
+        <span>Figma</span>
+        <span>Storybook</span>
+        <span>Vitest / Jest / Playwright</span>
+        <span>Elastic / Loki / Prometheus</span>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="section-title">
+        <h2 id="contact-title">Contact</h2>
+        <p>Parlez-nous de votre projet : nous vous répondons rapidement.</p>
+      </div>
+
+      <form id="contactForm" novalidate>
+        <label>
+          Nom / Société
+          <input type="text" name="name" placeholder="Votre nom" required />
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" placeholder="vous@exemple.com" required />
+        </label>
+        <label>
+          Message
+          <textarea name="message" placeholder="Décrivez brièvement votre besoin..." required></textarea>
+        </label>
+        <button type="submit" class="btn primary">Envoyer</button>
+        <div class="form-note">Ce formulaire est en démo : il ne déclenche pas encore d’envoi. Branchez-le à votre backend / service d’emailing.</div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> — Équipe Tech & Web. Tous droits réservés.
+  </footer>
+
+  <button id="backToTop" class="btn secondary" aria-label="Retour en haut">↑ Haut</button>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme toggle
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') document.body.classList.add('light');
+
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    });
+
+    // Back to top
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) backToTop.classList.add('show');
+      else backToTop.classList.remove('show');
+    });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Simple form validation (front only)
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      const missing = Object.entries(data).filter(([_, v]) => !v.trim());
+      if (missing.length) {
+        alert("Merci de remplir tous les champs requis.");
+        return;
+      }
+      alert("Merci ! Votre message a été capturé côté front (à connecter à un backend).");
+      form.reset();
+    });
+  </script>
+</body>
+</html>
